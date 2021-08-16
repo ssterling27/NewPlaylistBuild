@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playlist Builder</title>
+  <link rel="stylesheet" href="./reset.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <style>
+    .done {
+      color: blue;
+      font-weight: bold;
+      border: blue solid 2px;
+      padding-top: 5px;
+      /* padding-bottom: 0px; */
+      font-size: 1.30em;
+    }
+
+    .notDone {
+      color: black;
+      border: black dashed 1px;
+      padding-top: 10px;
+      font-size: 1.25em;
+
+    }
+
+    .row1 {
+      margin-top: 20px;
+    }
+
+    body {
+      background-color: #D4D9ED;
+    }
+
+    .row2 {
+      background-color: #C5C3E9;
+    }
+
+    .row3 {
+      background-color: #B9DFCD;
+    }
+
+    .text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section class="container">
+    <div class="row row1">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <h1>Playlist Builder</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row row2">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <form>
+          <section class="mb-3">
+            <label for="songInput" class="form-label">Enter Song Here</label>
+            <input type="text" class="form-control" id="songInput">
+          </section>
+          <button type="submit" class="btn btn-primary" id="addSong">Add Song</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="row row3">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <ul class="list-group" id="listedSongs"></ul>
+      </div>
+    </div>
+
+  </section>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>
+    $('#addSong').click(event => {
+      event.preventDefault()
+
+      let songInput = $('#songInput').val()
+      // let songInputElem = document.createElement(`li`)
+      // songInputElem.classList = 'list notDone'
+      const songInputElem = $(`<li class="list notDone"
+      <p class="text">${songInput}</p>
+      <button class="isDone btn btn-primary">Listened</button>
+      <button class="delete btn btn-primary">Delete</button>
+      </li>
+      `)
+
+      $('#listedSongs').append(songInputElem)
+      $('#songInput').val('')
+    })
+
+    $(document).click(event => {
+      if ($(event.target).attr('class').includes('delete')) {
+        $(event.target).parent().remove()
+      } else if ($(event.target).attr('class').includes('isDone')) {
+        if ($(event.target).parent().attr('class').includes('notDone')) {
+          $(event.target).parent().removeClass('notDone')
+          $(event.target).parent().addClass('done')
+        } else {
+          $(event.target).parent().removeClass('done')
+          $(event.target).parent().addClass('notDone')
+        }
+      }
+    })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
